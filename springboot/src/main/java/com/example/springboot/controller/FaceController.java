@@ -35,7 +35,7 @@ import static com.example.springboot.common.Result.success;
 
 /**
  * @author xh
- * @Date 2022/12/9
+ * @Date 2024/6/10
  */
 @RestController
 @RequestMapping("/face")
