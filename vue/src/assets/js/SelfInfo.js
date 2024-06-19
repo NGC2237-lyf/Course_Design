@@ -202,11 +202,11 @@ export default {
                 console.log("用户未设置头像");
                 this.imgDisplay = { display: "none" };
             } else {
-                this.imgDisplay = { display: "block" };
                 console.log("头像名称：" + data);
                 await request.get("/files/initAvatar/" + data).then((res) => {
                     if (res.code === "0") {
-                        this.image = res.data.data;
+                        this.imgDisplay = { display: "block" };
+                        this.image = res.data;
                     } else {
                         ElMessage({
                             message: res.msg,

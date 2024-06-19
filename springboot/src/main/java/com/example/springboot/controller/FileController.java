@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.example.springboot.common.Result;
 import com.example.springboot.common.UID;
 import com.example.springboot.constant.FileConfig;
@@ -125,17 +126,20 @@ public class FileController {
         System.out.println(filename);
         String path = rootFilePath + filename;
         System.out.println(path);
-        return Result.success(getImage(path));
+        return getImage(path);
     }
 
     /**
      * 根据路径得到图片字节数组
      */
-    private byte[] imgToByteByPath(String path) throws IOException {
+    private byte[] imgToByteByPath(String path) {
         //读取图片变成字节数组
-        FileInputStream fileInputStream = new FileInputStream(path);
+        FileInputStream fileInputStream;
+        ByteArrayOutputStream bos;
+        try {
+            fileInputStream = new FileInputStream(path);
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bos = new ByteArrayOutputStream();
         byte[] b = new byte[1024];
         int len = -1;
         while ((len = fileInputStream.read(b)) != -1) {
@@ -143,11 +147,17 @@ public class FileController {
         }
         fileInputStream.close();
         bos.close();
+        } catch (IOException e) {
+            return null;
+        }
         return bos.toByteArray();
     }
 
     private Result<?> getImage(String path) throws IOException {
         byte[] fileByte = imgToByteByPath(path);
+        if (ObjectUtil.isNull(fileByte)) {
+            return Result.error("-1","头像不存在");
+        }
         //进行base64编码
         BASE64Encoder encoder = new BASE64Encoder();
         String data = encoder.encode(fileByte);
