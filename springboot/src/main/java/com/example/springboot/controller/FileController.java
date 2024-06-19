@@ -2,6 +2,8 @@ package com.example.springboot.controller;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.example.springboot.common.Result;
 import com.example.springboot.common.UID;
 import com.example.springboot.constant.FileConfig;
@@ -12,15 +14,18 @@ import com.example.springboot.service.AdminService;
 import com.example.springboot.service.DormManagerService;
 import com.example.springboot.service.StudentService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sun.misc.BASE64Encoder;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @RestController
 @RequestMapping("/files")
@@ -48,10 +53,9 @@ public class FileController {
      * 将上传的头像写入本地 rootFilePath
      */
     @PostMapping("/upload")
-    public Result<?> upload(MultipartFile file) throws IOException {
+    public Result<?> upload(@RequestParam MultipartFile file) throws IOException {
         //获取文件名
         originalFilename = file.getOriginalFilename();
-        System.out.println(originalFilename);
         //获取文件尾缀
         String fileType = originalFilename.substring(originalFilename.lastIndexOf("."), originalFilename.length());
 
@@ -61,10 +65,8 @@ public class FileController {
         System.out.println(originalFilename);
         //存储位置
         String targetPath = rootFilePath + originalFilename;
-        System.out.println(targetPath);
         //获取字节流
         FileUtil.writeBytes(file.getBytes(), targetPath);
-
         return Result.success("上传成功");
     }
 
@@ -76,6 +78,9 @@ public class FileController {
     @Transactional
     public Result<?> uploadStuAvatar(@RequestBody Student student) throws IOException {
         if (originalFilename != null) {
+            if (!StringUtils.isEmpty(student.getAvatar())) {
+                FileUtil.del(rootFilePath + student.getAvatar());
+            }
             student.setAvatar(originalFilename);
             System.out.println(student);
             // 更新学生头像信息
@@ -92,6 +97,9 @@ public class FileController {
     @PostMapping("/uploadAvatar/admin")
     public Result<?> uploadAdminAvatar(@RequestBody Admin admin) throws IOException {
         if (originalFilename != null) {
+            if (!StringUtils.isEmpty(admin.getAvatar())) {
+                FileUtil.del(rootFilePath + admin.getAvatar());
+            }
             System.out.println(admin);
             admin.setAvatar(originalFilename);
             int i = adminService.updateAdmin(admin);
@@ -107,6 +115,9 @@ public class FileController {
     @PostMapping("/uploadAvatar/dormManager")
     public Result<?> uploadDormManagerAvatar(@RequestBody DormManager dormManager) throws IOException {
         if (originalFilename != null) {
+            if (!StringUtils.isEmpty(dormManager.getAvatar())) {
+                FileUtil.del(rootFilePath + dormManager.getAvatar());
+            }
             dormManager.setAvatar(originalFilename);
             int i = dormManagerService.updateNewDormManager(dormManager);
             if (i == 1) {
