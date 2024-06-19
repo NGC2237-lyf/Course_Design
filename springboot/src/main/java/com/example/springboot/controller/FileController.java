@@ -2,8 +2,6 @@ package com.example.springboot.controller;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
 import com.example.springboot.common.Result;
 import com.example.springboot.common.UID;
 import com.example.springboot.constant.FileConfig;
@@ -21,11 +19,9 @@ import sun.misc.BASE64Encoder;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Enumeration;
 
 @RestController
 @RequestMapping("/files")
