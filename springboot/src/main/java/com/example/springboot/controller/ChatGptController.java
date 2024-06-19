@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 /**
  * @author xh
- * @Date 2023/6/15
+ * @Date 2024/6/15
  */
 @RestController
 public class ChatGptController {

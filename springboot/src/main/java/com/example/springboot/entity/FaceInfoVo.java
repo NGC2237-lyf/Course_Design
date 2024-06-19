@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author xh
- * @Date 2022/11/3
+ * @Date 2024/6/10
  */
 @Data
 public class FaceInfoVo {
