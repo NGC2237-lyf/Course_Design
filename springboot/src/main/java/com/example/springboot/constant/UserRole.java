@@ -2,7 +2,7 @@ package com.example.springboot.constant;
 
 /**
  * @author xh
- * @Date 2022/12/9
+ * @Date 2024/6/4
  */
 public interface UserRole {
     Integer STU = 1;
