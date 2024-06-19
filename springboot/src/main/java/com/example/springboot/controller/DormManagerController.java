@@ -2,6 +2,7 @@ package com.example.springboot.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.common.Result;
+import com.example.springboot.constant.UserRole;
 import com.example.springboot.entity.DormManager;
 import com.example.springboot.entity.User;
 import com.example.springboot.service.DormManagerService;
@@ -81,7 +82,7 @@ public class DormManagerController {
         if (o != null) {
             System.out.println(o);
             //存入session
-            session.setAttribute("Identity", "dormManager");
+            session.setAttribute("Identity", UserRole.DORM.getValue());
             session.setAttribute("User", o);
             return Result.success(o);
         } else {

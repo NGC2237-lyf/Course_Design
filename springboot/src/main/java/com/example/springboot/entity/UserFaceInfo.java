@@ -23,7 +23,7 @@ public class UserFaceInfo implements Serializable {
     /**
      * 用户角色
      */
-    private Integer userRole;
+    private String userRole;
     /**
      * 用户ID
      */

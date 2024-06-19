@@ -2,6 +2,7 @@ package com.example.springboot.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.common.Result;
+import com.example.springboot.constant.UserRole;
 import com.example.springboot.entity.Student;
 import com.example.springboot.entity.User;
 import com.example.springboot.service.StudentService;
@@ -99,7 +100,7 @@ public class StudentController {
         if (o != null) {
             System.out.println(o);
             //存入session
-            session.setAttribute("Identity", "stu");
+            session.setAttribute("Identity", UserRole.STU.getValue());
             session.setAttribute("User", o);
             return Result.success(o);
         } else {

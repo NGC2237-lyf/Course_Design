@@ -8,29 +8,38 @@
       <div style="display: flex">
         <div style="width: 600px; margin-left: 30px; position: relative">
           <div>
-            <el-upload :on-success="uploadSuccess" :show-file-list="false"
-                       action="http://localhost:9099/files/upload/"
-                       class="upload-demo"
+            <el-upload
+              :on-success="uploadSuccess"
+              :show-file-list="false"
+              action="http://localhost:9099/files/upload/"
+              class="upload-demo"
             >
               <div class="AvatarDiv">
-                <el-avatar icon="UserFilled" style="width: 80px; height: 80px" v-show='image == ""'></el-avatar>
-                <img :src="'data:image;base64,' + image" :style="imgDisplay"
-                     style="width: 80px; height: 80px; border-radius: 40px"/>
-                <div class="editImg">
-                  更换头像
-                  <el-icon color="color">
-                    <edit></edit>
-                  </el-icon>
-                </div>
+                <el-avatar
+                  icon="UserFilled"
+                  style="width: 80px; height: 80px"
+                  v-show="image == ''"
+                ></el-avatar>
+                <img
+                  :src="'data:image;base64,' + image"
+                  :style="imgDisplay"
+                  style="width: 80px; height: 80px; border-radius: 40px"
+                />
               </div>
             </el-upload>
           </div>
-          <el-descriptions :column="1" :size="large" border style="min-width: 500px" title="">
+          <el-descriptions
+            :column="1"
+            :size="large"
+            border
+            style="min-width: 500px"
+            title=""
+          >
             <el-descriptions-item>
               <template #label>
                 <div>
                   <el-icon>
-                    <user/>
+                    <user />
                   </el-icon>
                   用户名
                 </div>
@@ -41,7 +50,7 @@
               <template #label>
                 <div>
                   <el-icon>
-                    <location/>
+                    <location />
                   </el-icon>
                   姓名
                 </div>
@@ -52,7 +61,7 @@
               <template #label>
                 <div>
                   <el-icon>
-                    <tickets/>
+                    <tickets />
                   </el-icon>
                   性别
                 </div>
@@ -63,7 +72,7 @@
               <template #label>
                 <div>
                   <el-icon>
-                    <office-building/>
+                    <office-building />
                   </el-icon>
                   年龄
                 </div>
@@ -74,7 +83,7 @@
               <template #label>
                 <div>
                   <el-icon>
-                    <iphone/>
+                    <iphone />
                   </el-icon>
                   手机号
                 </div>
@@ -85,7 +94,7 @@
               <template #label>
                 <div>
                   <el-icon>
-                    <office-building/>
+                    <office-building />
                   </el-icon>
                   邮箱
                 </div>
@@ -94,32 +103,69 @@
             </el-descriptions-item>
           </el-descriptions>
           <el-tooltip content="修改信息" placement="bottom">
-            <el-button icon="Edit" size="large" style="margin-top: 30px; width: 80px" type="primary" @click="Edit">
+            <el-button
+              icon="Edit"
+              size="large"
+              style="margin-top: 30px; width: 80px"
+              type="primary"
+              @click="Edit"
+            >
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="上传面容" placement="bottom">
+            <el-button
+              icon="Upload"
+              size="large"
+              style="margin-top: 30px; margin-left: 410px; width: 80px"
+              type="primary"
+              @click="faceVisible = true"
+            >
             </el-button>
           </el-tooltip>
         </div>
         <div style="margin-left: 130px">
-          <img alt="" src="../../public/self_Space.png"/>
+          <img alt="" src="../../public/self_Space.png" />
         </div>
       </div>
       <div>
         <!--      弹窗-->
-        <el-dialog v-model="dialogVisible" title="操作" width="30%" @close="cancel">
+        <el-dialog
+          v-model="dialogVisible"
+          title="操作"
+          width="30%"
+          @close="cancel"
+        >
           <el-form ref="form" :model="form" :rules="rules" label-width="120px">
             <el-form-item label="账号" prop="username">
-              <el-input v-model="form.username" disabled style="width: 80%"></el-input>
+              <el-input
+                v-model="form.username"
+                disabled
+                style="width: 80%"
+              ></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input v-model="form.password" :disabled="disabled" :show-password="showpassword" show-password
-                        style="width: 80%"></el-input>
+              <el-input
+                v-model="form.password"
+                :disabled="disabled"
+                :show-password="showpassword"
+                style="width: 80%"
+              ></el-input>
               <el-tooltip content="修改密码" placement="right">
-                <el-icon size="large" style="margin-left: 5px; cursor: pointer" @click="EditPass">
-                  <edit/>
+                <el-icon
+                  size="large"
+                  style="margin-left: 5px; cursor: pointer"
+                  @click="EditPass"
+                >
+                  <edit />
                 </el-icon>
               </el-tooltip>
             </el-form-item>
             <el-form-item :style="display" label="确认密码" prop="checkPass">
-              <el-input v-model="form.checkPass" show-password style="width: 80%"></el-input>
+              <el-input
+                v-model="form.checkPass"
+                show-password
+                style="width: 80%"
+              ></el-input>
             </el-form-item>
             <el-form-item label="姓名" prop="name">
               <el-input v-model="form.name" style="width: 80%"></el-input>
@@ -132,7 +178,10 @@
               <el-input v-model.number="form.age" style="width: 80%"></el-input>
             </el-form-item>
             <el-form-item label="手机号" prop="phoneNum">
-              <el-input v-model.number="form.phoneNum" style="width: 80%"></el-input>
+              <el-input
+                v-model.number="form.phoneNum"
+                style="width: 80%"
+              ></el-input>
             </el-form-item>
             <el-form-item label="邮箱地址" prop="email">
               <el-input v-model="form.email" style="width: 80%"></el-input>
@@ -146,8 +195,62 @@
           </template>
         </el-dialog>
       </div>
+      <div>
+        <el-dialog
+          v-model="faceVisible"
+          title="上传面容"
+          width="30%"
+          @close="faceVisible = false"
+          @opened="checkCamera"
+        >
+          <div>
+            <p style="font-size: large; text-align: center">请把脸对准摄像头</p>
+            <div class="regInfo">
+              <div class="canvas">
+                <!--描绘video截图-->
+                <canvas
+                  ref="cav"
+                  id="canvas"
+                  width="200"
+                  height="200"
+                  v-show="ishandleClick"
+                ></canvas>
+                <!--video用于显示媒体设备的视频流，自动播放-->
+                <video
+                  ref="vd"
+                  id="video"
+                  autoplay
+                  style="width: 200px; height: 200px"
+                ></video>
+              </div>
+            </div>
+            <p style="text-align: center; padding: 50px 0 0">
+              <el-button id="capture" ref="capture" @click="handleClick"
+                >拍照</el-button
+              >
+            </p>
+          </div>
+        </el-dialog>
+      </div>
     </el-card>
   </div>
 </template>
-<script src="@/assets/js/SelfInfo.js"></script>
-<style scoped>@import '../assets/css/SelfInfo.css';</style>
+    <script src="@/assets/js/SelfInfo.js"></script>
+<style rel="stylesheet/scss" lang="scss" scoped>
+@import "../assets/css/SelfInfo.css";
+.regInfo {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    margin: 20px auto;
+    position: relative;
+
+    .canvas {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+}
+</style>

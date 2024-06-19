@@ -3,6 +3,24 @@ server:
   port: 9099
 # Spring配置
 spring:
+  # mysql 配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dormitory_face?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: XCC18535507996
+  # redis 配置
+  redis:
+    # 地址
+    host: localhost
+    # 端口，默认为6379
+    port: 6379
+    # 数据库索引（db0，db1，db2...不同业务可以放在不同数据库中）
+    database: 2
+    # 密码
+    password: XCC18535507996
+    # 连接超时时间
+    timeout: 10s
   # jackson时间格式化
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -11,24 +29,6 @@ spring:
   session:
     timeout: 86400
     store-type: redis
-  # DataSource Config
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dormitory_face?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
-    username: root
-    password: QAZlyf207
-  # redis 配置
-  redis:
-    # 地址
-    host: localhost
-    # 端口，默认为8379
-    port: 6379
-    # 数据库索引（db0，db1，db2...不同业务可以放在不同数据库中）
-    database: 2
-    # 密码
-    password:
-    # 连接超时时间
-    timeout: 10s
     jedis:
       pool:
         # 连接池中的最小空闲连接

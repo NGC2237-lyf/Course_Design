@@ -2,6 +2,7 @@ package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
 import com.example.springboot.common.UID;
+import com.example.springboot.constant.UserRole;
 import com.example.springboot.entity.Admin;
 import com.example.springboot.entity.User;
 import com.example.springboot.service.AdminService;
@@ -27,7 +28,7 @@ public class AdminController {
         if (o != null) {
             System.out.println(o);
             //存入session
-            session.setAttribute("Identity", "admin");
+            session.setAttribute("Identity", UserRole.ADMIN.getValue());
             session.setAttribute("User", o);
             return Result.success(o);
         } else {
