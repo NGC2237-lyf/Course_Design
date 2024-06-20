@@ -166,9 +166,9 @@ public class FaceController {
         }
         System.out.println("相似度：" + faceInfoVo.getSimilarity());
         //引擎卸载
-        if (faceInfoVo.isResult()) {
-            errorCode = faceEngine.unInit();
-        }
+//        if (faceInfoVo.isResult()) {
+//            errorCode = faceEngine.unInit();
+//        }
         return faceInfoVo;
     }
 
