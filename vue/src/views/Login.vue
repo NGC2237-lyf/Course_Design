@@ -26,19 +26,19 @@
           </el-form-item>
           <el-form-item>
             <el-button :disabled="!disabled"
-              style="width: 20%;margin-left:20%;background: linear-gradient(135deg, #6e8efb, #a777e3);" type="primary"
-              @click="login">登 录</el-button>
+                       style="width: 20%;margin-left:20%;background: linear-gradient(135deg, #6e8efb, #a777e3);" type="primary"
+                       @click="login">登 录</el-button>
             <el-button style="margin-left:16%;background: linear-gradient(135deg, #6e8efb, #a777e3);" type="primary"
-              @click="faceLogin()">人脸识别</el-button>
+                       @click="faceLogin()">人脸识别</el-button>
           </el-form-item>
         </el-form>
       </div>
     </div>
 
     <div class="videoContainer">
-      <!-- <video class="fullscreenVideo" id="bgVid" playsinline="" autoplay="" muted="" loop="">
-        <source src="../assets/video/spa1.mp4" type="video/mp4">
-      </video> -->
+      <video class="fullscreenVideo" id="bgVid" playsinline="" autoplay="" muted="" loop="">
+        <source src="../assets/video/spa.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </template>
